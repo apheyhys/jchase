@@ -1,0 +1,106 @@
+{% extends 'novels/base.html' %}
+{% load static %}
+{% block title %} {{ novels }}| Джеймс Хедли Чейз{% endblock %}
+{% block extra_head_tags %}
+    <meta name="description" content="{{ description }}"/>
+{% endblock %}
+
+{% block content %}
+
+    <ul class="nav nav-tabs bg-white justify-content-center">
+        <li class="nav-item dropdown">
+
+            <a class="nav-link dropdown-toggle active text-info" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="true" aria-expanded="false">Романы</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/">По порядку</a>
+                <a class="dropdown-item" href="{% url 'hero_novels' %}">По сериям</a>
+                <a class="dropdown-item" href="{% url 'genre_novels' %}">По жанру</a>
+            </div>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-info" href="{% url 'stories' %}">Рассказы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'films' %}">Фильмы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'biography' %}">Биография</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'audiobooks' %}">Аудиокниги</a>
+        </li>
+    </ul>
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+
+
+    </div>
+
+    <div class="container">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light">
+                <li class="breadcrumb-item"><a href="{% url 'novels_list' %}" class="text-info">Романы</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ novels }}</li>
+            </ol>
+        </nav>
+
+        <h1 class="display-5 text-center">{{ novels }}</h1>
+
+
+        <div class="pagination justify-content-center mb-2">
+            <ul class="step-links pagination justify-content-center">
+                {% if plines.has_previous %}
+                    <li class="page-item"><a class="page-link text-info" href="?page=1">&laquo; </a></li>
+                    <li class="page-item"><a class="page-link text-info"
+                                             href="?page={{ plines.previous_page_number }}">{{ plines.previous_page_number }}</a></li>
+                {% endif %}
+
+                <span class="current">
+            <li class="page-item disabled"><a
+                    class="page-link"> {{ plines.number }} из {{ plines.paginator.num_pages }}</a></li>
+        </span>
+
+                {% if plines.has_next %}
+                    <li class="page-item"><a class="page-link text-info" href="?page={{ plines.next_page_number }}">{{ plines.next_page_number }}</a>
+                    </li>
+                    <li class="page-item"><a class="page-link text-info" href="?page={{ plines.paginator.num_pages }}"> &raquo;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+
+        {% for x in plines %}
+            {{ x }} <br>
+        {% endfor %}
+
+        <div class="pagination justify-content-center mb-2">
+            <ul class="step-links pagination justify-content-center">
+                {% if plines.has_previous %}
+                    <li class="page-item"><a class="page-link text-info" href="?page=1">&laquo; </a></li>
+                    <li class="page-item"><a class="page-link text-info"
+                                             href="?page={{ plines.previous_page_number }}">{{ plines.previous_page_number }}</a></li>
+                {% endif %}
+
+                <span class="current">
+            <li class="page-item disabled"><a
+                    class="page-link"> {{ plines.number }} из {{ plines.paginator.num_pages }}</a></li>
+        </span>
+
+                {% if plines.has_next %}
+                    <li class="page-item"><a class="page-link text-info" href="?page={{ plines.next_page_number }}">{{ plines.next_page_number }}</a>
+                    </li>
+                    <li class="page-item"><a class="page-link text-info" href="?page={{ plines.paginator.num_pages }}"> &raquo;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+
+
+
+        <div>
+
+
+
+{% endblock %}

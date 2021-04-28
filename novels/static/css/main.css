@@ -1,0 +1,285 @@
+@font-face {
+    font-family: FontAwesome;
+    src: url(static/css/fontawesome-free-5.4.1-web/webfonts/fa-brands-400.woff);
+}
+
+
+
+.different-font {
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 36px;
+    color: black;
+}
+
+.with-pointer {
+    cursor: pointer;
+}
+
+#collapseOne {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#menu-title {
+    color: black;
+}
+
+.audiobooks p {
+    float: left;
+    line-height: 100%;
+    margin-bottom: 0;
+}
+
+.audiobooks small {
+    float: right;
+}
+
+.audiobooks small a {
+    text-shadow: -1px -1px 1px #fff;
+}
+
+.any-card {
+    background-color: #efefef;
+    padding: 10px;
+    border-radius: 5px;
+    width: inherit;
+}
+
+/* Таблица */
+
+.table-header {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #212529;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+/*div.greyGridTable {*/
+    /*border: 1px solid #FFFFFF;*/
+    /*width: 100%;*/
+    /*text-align: left;*/
+    /*border-collapse: collapse;*/
+/*}*/
+
+/*.divTable.greyGridTable .divTableCell, .divTable.greyGridTable .divTableHead {*/
+    /*border-bottom: 1px solid #dee2e6;*/
+    /*padding: 0.75rem;*/
+/*}*/
+
+/*.divTable.greyGridTable .divTableBody .divTableCell {*/
+    /*font-size: 1rem;*/
+/*}*/
+
+/*.divTable.greyGridTable .divTableHeading {*/
+    /*background: #FFFFFF;*/
+    /*border-bottom: 2px solid #dee2e6;*/
+    /*border-top: 2px solid #dee2e6;*/
+
+/*}*/
+
+/*.divTable.greyGridTable .divTableHeading .divTableHead {*/
+    /*font-size: 1rem;*/
+    /*font-weight: bold;*/
+    /*color: #212529;*/
+    /*text-align: left;*/
+/*}*/
+
+/* DivTable.com */
+/*.divTable {*/
+    /*display: table;*/
+/*}*/
+
+/*.divTableRow {*/
+    /*display: table-row;*/
+    /*width: 100%;*/
+/*}*/
+
+/*.divTableHeading {*/
+    /*display: table-header-group;*/
+/*}*/
+
+/*.divTableCell, .divTableHead {*/
+    /*display: table-cell;*/
+/*}*/
+
+/*.divTableHeading {*/
+    /*display: table-header-group;*/
+/*}*/
+
+/*.divTableFoot {*/
+    /*display: table-footer-group;*/
+/*}*/
+
+/*.divTableBody {*/
+    /*display: table-row-group;*/
+/*}*/
+
+.description {
+    border-top: 2px solid #dddddd;
+    border-bottom: 2px solid #dddddd;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.title-description {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.text-to-right {
+    float: right;
+    text-shadow: 1px 1px white;
+}
+
+.text-to-left {
+    float: left;
+    /*word-wrap: break-word;*/
+    /*width: 70%;*/
+    display: inline-block;
+
+}
+
+/* Fotogallery */
+
+.thumb img {
+    -webkit-filter: grayscale(0);
+    filter: none;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 5px;
+
+}
+
+.thumb img:hover {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+
+.thumb {
+    padding: 5px;
+
+}
+
+/* Переворачивание иконки */
+
+.reverse-icon img {
+    transform: rotate(0deg);
+}
+
+div[aria-expanded="false"] img {
+    transition-duration: 0.5s;
+    transform: rotate(0deg);
+}
+
+div[aria-expanded="true"] img {
+    transition-duration: 0.5s;
+    transform: rotate(90deg);
+}
+
+/*Кнопка вверх*/
+
+#updown {
+    height: 36px;
+    width: 56px;
+    color: #6CDAFA;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    cursor: pointer;
+}
+
+#updown.up::before {
+    content: "\f35b";
+    font-family: 'Font Awesome\ 5 Free';
+    height: 36px;
+    width: 56px;
+    font-size: 2rem;
+}
+
+#updown.down::before {
+    content: "";
+}
+
+/* Карточки  */
+
+.fleximg {
+    height: 500px;
+}
+
+.fleximg img {
+    max-height: 500px;
+}
+
+.infinite {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-muted {
+    font-size: 0.8rem;
+}
+
+.empty-place {
+    height: 2.2rem;
+}
+
+/* Отображение лист/плитки */
+
+#main .card-off {
+    display: none;
+}
+
+#secondary .film-list {
+    display: none;
+}
+
+#secondary .list-view {
+    display: block;
+}
+
+/*Фон для страницы Биография*/
+
+#biography-left-background {
+    background: url(/static/images/collage-chase-left.png) repeat-y #000;
+    background-size: contain;
+}
+
+#biography-right-background {
+    background: url(/static/images/collage-chase-right.png) repeat-y #000;
+    background-size: contain;
+}
+
+/*Thanks*/
+
+#thanks {
+    height: 300px;
+}
+
+/*CAPTCHA*/
+#id_captcha_1 {
+    color: #117A8B;
+    border-color: #117A8B;
+}
+
+#id_captcha_1:focus {
+    box-shadow: 0 0 5px #117A8B;
+}
+
+.errorlist li {
+    color: #FF0039;
+}
+
+/*Error 404*/
+
+.error-404 {
+    height: 10%;
+
+}
+

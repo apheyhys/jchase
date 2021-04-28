@@ -1,0 +1,484 @@
+{% extends 'novels/base.html' %}
+{% load static %}
+{% block title %} Романы по главным героям | Джеймс Хедли Чейз{% endblock %}
+{% block extra_head_tags %}
+    <meta name="description" content="Романы Джеймса Хедли Чейза. По главным героям, сериям."/>
+{% endblock %}
+{% block content %}
+    <ul class="nav nav-tabs bg-white justify-content-center">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active text-info" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="true" aria-expanded="false">Романы</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/">По порядку</a>
+                <a class="dropdown-item" href="{% url 'hero_novels' %}">По сериям</a>
+                <a class="dropdown-item" href="{% url 'genre_novels' %}">По жанру</a>
+            </div>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-info" href="{% url 'stories' %}">Рассказы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'films' %}">Фильмы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'biography' %}">Биография</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'audiobooks' %}">Аудиокниги</a>
+        </li>
+    </ul>
+
+    <div class="container mt-5">
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-5">Романы по сериям</h1>
+        </div>
+        {% for hero in heroes %}
+            <div><h3 class="mt-3" id="{{ hero }}">{{ hero }}</h3></div>
+            <div class="row table-header">
+                <div class="col-1 col-sm-1">#</div>
+                <div class="col-2 col-sm-1">Год</div>
+                <div class="col-4 col-sm-3">Название на английском</div>
+                <div class="col-4 col-sm-4">Название на русском</div>
+                <div class="сol-sm-2 d-none d-sm-block">Место действия</div>
+                <div class="col-1 col-sm-1"></div>
+            </div>
+            {% for novel in hero.novel_set.all %}
+                <div class="row with-pointer" id="un-collapse-{{ novel.serial_number }}"
+                     data-toggle="collapse" data-target="#collapse_{{ novel.serial_number }}"
+                     aria-expanded="false"
+                     aria-controls="collapse_{{ novel.serial_number }}">
+                    <div class="col-sm-1 col-1"><b>{{ novel.serial_number }}</b></div>
+                    <div class="col-sm-1 col-2">{{ novel.year }}</div>
+                    <div class="col-sm-3 col-3">{{ novel.title_eng }}</div>
+                    <div class="col-sm-4 col-4">{{ novel.title_rus }}</div>
+                    <div class="col-sm-2 d-none d-sm-block">{{ novel.location }}</div>
+                    <div class="col-sm-1 col-1"><img src="{% static "svg/baseline-play_circle_outline-24px.svg" %}">
+                    </div>
+                </div>
+                <hr>
+                <div id="collapse_{{ novel.serial_number }}" class="collapse any-card" data-id="{{ novel.slug }}">
+                    <div class="col-12 row">
+                        <div class="col-sm-4 col-12">
+                            {% if novel.alternative_title_eng_1 %}
+                                <p class="font-weight-bold">Альтернативные названия на английском</p>
+                                <p>{{ novel.alternative_title_eng_1 }}</p>
+                            {% else %}
+                                <p class="font-weight-bold">Альтернативные названия на английском</p>
+                                <p> - </p>
+                            {% endif %}
+                            {% if novel.alternative_title_eng_2 %}
+                                <p>{{ novel.alternative_title_eng_2 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_eng_3 %}
+                                <p>{{ novel.alternative_title_eng_3 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_1 %}
+                                <p class="font-weight-bold">Альтернативные названия на русском</p>
+                                <p>{{ novel.alternative_title_rus_1 }}</p>
+                            {% else %}
+                                <p class="font-weight-bold">Альтернативные названия на русском</p>
+                                <p> - </p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_2 %}
+                                <p>{{ novel.alternative_title_rus_2 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_3 %}
+                                <p>{{ novel.alternative_title_rus_3 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_4 %}
+                                <p>{{ novel.alternative_title_rus_4 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_5 %}
+                                <p>{{ novel.alternative_title_rus_5 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_6 %}
+                                <p>{{ novel.alternative_title_rus_6 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_7 %}
+                                <p>{{ novel.alternative_title_rus_7 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_8 %}
+                                <p>{{ novel.alternative_title_rus_8 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_9 %}
+                                <p>{{ novel.alternative_title_rus_9 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_10 %}
+                                <p>{{ novel.alternative_title_rus_10 }}</p>
+                            {% endif %}
+                            {% if novel.alternative_title_rus_11 %}
+                                <p>{{ novel.alternative_title_rus_11 }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-4 col-12">
+                            <p class="font-weight-bold">Главный герой, серия</p>
+                            {% if novel.main_characters.all %}
+                                <p>{% for main_character in novel.main_characters.all %}
+                                    <a href="{% url 'hero_novels' %}">
+                                        {{ main_character }}{% if not forloop.last %}, {% endif %}</a>
+                                {% endfor %}
+                                </p>
+                            {% else %}
+                                <p> &ndash; </p>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-4 col-12">
+                            <p class="font-weight-bold">Жанр</p>
+                            <a href="{% url 'genre_novels' %}#{{ novel.book_genre }}"><p>{{ novel.book_genre }}</p></a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="description">
+                            <p class="title-description">Аннотация</p>
+                            <p>{{ novel.description }}</p>
+                        </div>
+                    </div>
+                    <div class="col-12 row">
+                        <div class="col-12">
+                            {% if novel.books_rus_epub or novel.books_rus_fb2 or novel.books_rus_pdf or novel.books_rus_djvu %}
+                                <p class="font-weight-bold">Скачать книгу на русском языке в формате</p>
+                                <div class="row ml-1 mb-4">
+                                    {% if novel.books_rus_fb2 %}
+                                        <a href="{{ novel.books_rus_fb2.url }}"><img
+                                                src="{% static "images/icons8-fb2-50.png" %}" alt=""></a>
+                                    {% endif %}
+                                    {% if novel.books_rus_epub %}
+                                        <a href="{{ novel.books_rus_epub.url }}"><img
+                                                src="{% static "images/icons8-epub-50.png" %}" alt=""></a>
+                                    {% endif %}
+                                    {% if novel.books_rus_pdf %}
+                                        <a href="{{ novel.books_rus_pdf.url }}"><img
+                                                src="{% static "images/icons8-pdf-50.png" %}" alt=""></a>
+                                    {% endif %}
+                                    {% if novel.books_rus_djvu %}
+                                        <a href="{{ novel.books_rus_djvu.url }}"><img
+                                                src="{% static "images/icons8-djvu-50.png" %}" alt=""></a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            {% if novel.books_eng_epub or novel.books_eng_pdf or novel.books_eng_djvu %}
+                                <p class="font-weight-bold">Скачать книгу на английском языке в формате</p>
+                                <div class="row ml-1 mb-4">
+                                    {% if novel.books_eng_epub %}
+                                        <a href="{{ novel.books_eng_epub.url }}"><img
+                                                src="{% static "images/icons8-epub-50.png" %}" alt=""></a>
+                                    {% endif %}
+                                    {% if novel.books_eng_pdf %}
+                                        <a href="{{ novel.books_eng_pdf.url }}"><img
+                                                src="{% static "images/icons8-pdf-50.png" %}" alt=""></a>
+                                    {% endif %}
+                                    {% if novel.books_eng_djvu %}
+                                        <a href="{{ novel.books_eng_djvu.url }}"><img
+                                                src="{% static "images/icons8-djvu-50.png" %}" alt=""></a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            {% if novel.books_fr_epub or novel.books_fr_pdf %}
+                                <p class="font-weight-bold">Скачать книгу на французском языке в формате</p>
+                                <div class="row ml-1 mb-4">
+                                    {% if novel.books_fr_epub %}
+                                        <a href="{{ novel.books_fr_epub.url }}"><img
+                                                src="{% static "images/icons8-epub-50.png" %}" alt=""></a>
+                                    {% endif %}
+                                    {% if novel.books_fr_pdf %}
+                                        <a href="{{ novel.books_fr_pdf.url }}"><img
+                                                src="{% static "images/icons8-pdf-50.png" %}" alt=""></a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            {% if novel.books_it_pdf %}
+                                <p class="font-weight-bold">Скачать книгу на итальянском языке в формате</p>
+                                <div class="row ml-1 mb-4">
+                                    <a href="{{ novel.books_it_pdf.url }}"><img
+                                            src="{% static "images/icons8-pdf-50.png" %}" alt=""></a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-12 mb-4">
+                        {% if novel.audiobooks.all %}
+                            <p class="font-weight-bold">Аудиокниги на русском</p>
+                            {% for audiobook in novel.audiobooks.all %}
+                                <a href="{{ audiobook.links }}" target="_blank">
+                                    <button type="button"
+                                            class="btn btn-secondary btn-sm btn-block mt-2 text-truncate infinite">
+                                    <span class="text-to-left">Название: {{ audiobook.title }} <span
+                                            class="display-none">|</span> </span>
+                                        <span class="text-to-left">Исполнитель: {{ audiobook.author }} <span
+                                                class="display-none">|</span></span>
+                                        <span class="text-to-left">Длительность: {{ audiobook.running_time }}ч. <span
+                                                class="display-none">|</span></span>
+                                        {% if audiobook.release_date %}
+                                            <span class="text-to-left">Год: {{ audiobook.release_date }} <span
+                                                    class="display-none">|</span></span>
+                                        {% endif %}
+                                        <span class="text-to-left">Битрейт: {{ audiobook.bitrate }}</span>
+                                        <span class="text-to-right">Скачать с Яндекс.Диск</span>
+                                    </button>
+                                </a>
+                            {% endfor %}
+                        {% endif %}
+                        {% if novel.get_films.all %}
+                            <p class="font-weight-bold mt-3">Фильмы по сюжету романа</p>
+                            {% for film in novel.get_films.all %}
+                                <a href="{{ film.links }}" target="_blank">
+                                    <button type="button" class="btn btn-secondary btn-sm btn-block mt-2 infinite">
+                                        <span class="text-to-left ">Название: {{ film.title_rus }} <span
+                                                class="display-none">|</span></span>
+                                        <span class="text-to-left">Режиссер: {{ film.director }} <span
+                                                class="display-none">|</span></span>
+                                        <span class="text-to-left">Страна: {{ film.country }}
+                                        <span class="display-none">|</span></span>
+                                        <span class="text-to-left">Год: {{ film.release_date }}
+                                        <span class="display-none">|</span> </span>
+                                        <span class="text-to-left"> Длительность: {{ film.running_time }}м.</span>
+                                        <span class="text-to-right">Смотреть</span>
+                                    </button>
+                                </a>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="container">
+                        <div class="text-center">
+                            <a href="/novels/{{ novel.slug }}" type="button" class="btn btn-outline-info btn-lg"
+                               target="_blank">Читать онлайн</a>
+                            <img src="{{ novel.covers.url }}"/>
+                        </div>
+                    </div>
+                    <div class="container mt-4">
+                        <h2 class="h3 text-center pt-3 border-top">Обложки книг</h2>
+                        <div class="row" id="{{ novel.serial_number }}">
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div><h3 class="mt-3">Без серии</h3></div>
+        <div class="row table-header">
+            <div class="col-1 col-sm-1">#</div>
+            <div class="col-2 col-sm-1">Год</div>
+            <div class="col-4 col-sm-3">Название на английском</div>
+            <div class="col-4 col-sm-4">Название на русском</div>
+            <div class="сol-sm-2 d-none d-sm-block">Место действия</div>
+            <div class="col-1 col-sm-1"></div>
+        </div>
+        {% for non_hero in non_heroes %}
+            <div class="row with-pointer" id="un-collapse-{{ non_hero.serial_number }}"
+                 data-toggle="collapse" data-target="#collapse_{{ non_hero.serial_number }}"
+                 aria-expanded="false"
+                 aria-controls="collapse_{{ non_hero.serial_number }}">
+                <div class="col-sm-1 col-1"><b>{{ non_hero.serial_number }}</b></div>
+                <div class="col-sm-1 col-2">{{ non_hero.year }}</div>
+                <div class="col-sm-3 col-3">{{ non_hero.title_eng }}</div>
+                <div class="col-sm-4 col-4">{{ non_hero.title_rus }}</div>
+                <div class="col-sm-2 d-none d-sm-block">{{ non_hero.location }}</div>
+                <div class="col-sm-1 col-1"><img src="{% static "svg/baseline-play_circle_outline-24px.svg" %}"></div>
+            </div>
+            <hr>
+            <div id="collapse_{{ non_hero.serial_number }}" class="collapse any-card" data-id="{{ non_hero.slug }}">
+                <div class="col-12 row">
+                    <div class="col-sm-4 col-12">
+                        {% if non_hero.alternative_title_eng_1 %}
+                            <p class="font-weight-bold">Альтернативные названия на английском</p>
+                            <p>{{ non_hero.alternative_title_eng_1 }}</p>
+                        {% else %}
+                            <p class="font-weight-bold">Альтернативные названия на английском</p>
+                            <p> - </p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_eng_2 %}
+                            <p>{{ non_hero.alternative_title_eng_2 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_eng_3 %}
+                            <p>{{ non_hero.alternative_title_eng_3 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_1 %}
+                            <p class="font-weight-bold">Альтернативные названия на русском</p>
+                            <p>{{ non_hero.alternative_title_rus_1 }}</p>
+                        {% else %}
+                            <p class="font-weight-bold">Альтернативные названия на русском</p>
+                            <p> - </p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_2 %}
+                            <p>{{ non_hero.alternative_title_rus_2 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_3 %}
+                            <p>{{ non_hero.alternative_title_rus_3 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_4 %}
+                            <p>{{ non_hero.alternative_title_rus_4 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_5 %}
+                            <p>{{ non_hero.alternative_title_rus_5 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_6 %}
+                            <p>{{ non_hero.alternative_title_rus_6 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_7 %}
+                            <p>{{ non_hero.alternative_title_rus_7 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_8 %}
+                            <p>{{ non_hero.alternative_title_rus_8 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_9 %}
+                            <p>{{ non_hero.alternative_title_rus_9 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_10 %}
+                            <p>{{ non_hero.alternative_title_rus_10 }}</p>
+                        {% endif %}
+                        {% if non_hero.alternative_title_rus_11 %}
+                            <p>{{ non_hero.alternative_title_rus_11 }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <p class="font-weight-bold">Главный герой, серия</p>
+                        {% if non_hero.main_characters.all %}
+                            <p>{% for main_character in non_hero.main_characters.all %}
+                                <a href="{% url 'hero_novels' %}#{{ main_character }}" class="text-info">
+                                    {{ main_character }}{% if not forloop.last %}, {% endif %}</a>
+                            {% endfor %}
+                            </p>
+                        {% else %}
+                            <p> &ndash; </p>
+                        {% endif %}
+                        <p class="font-weight-bold d-block d-sm-none">Место действия</p>
+                        <p class="d-block d-sm-none">{{ novel.location }}</p>
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <p class="font-weight-bold">Жанр</p>
+                        <a href="{% url 'genre_novels' %}#{{ novel.book_genre }}" class="text-info">
+                            <p>{{ novel.book_genre }}</p></a>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="description">
+                        <p class="title-description">Аннотация</p>
+                        <p>{{ non_hero.description }}</p>
+                    </div>
+                </div>
+                <div class="col-12 row">
+                    <div class="col-12">
+                        {% if non_hero.books_rus_epub or non_hero.books_rus_fb2 or non_hero.books_rus_pdf or non_hero.books_rus_djvu %}
+                            <p class="font-weight-bold">Скачать книгу на русском языке в формате</p>
+                            <div class="row ml-1 mb-4">
+                                {% if non_hero.books_rus_fb2 %}
+                                    <a href="{{ non_hero.books_rus_fb2.url }}"><img
+                                            src="{% static "images/icons8-fb2-50.png" %}" alt=""></a>
+                                {% endif %}
+                                {% if non_hero.books_rus_epub %}
+                                    <a href="{{ non_hero.books_rus_epub.url }}"><img
+                                            src="{% static "images/icons8-epub-50.png" %}" alt=""></a>
+                                {% endif %}
+                                {% if non_hero.books_rus_pdf %}
+                                    <a href="{{ non_hero.books_rus_pdf.url }}"><img
+                                            src="{% static "images/icons8-pdf-50.png" %}" alt=""></a>
+                                {% endif %}
+                                {% if non_hero.books_rus_djvu %}
+                                    <a href="{{ non_hero.books_rus_djvu.url }}"><img
+                                            src="{% static "images/icons8-djvu-50.png" %}" alt=""></a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if non_hero.books_eng_epub or non_hero.books_eng_pdf or non_hero.books_eng_djvu %}
+                            <p class="font-weight-bold">Скачать книгу на английском языке в формате</p>
+                            <div class="row ml-1 mb-4">
+                                {% if non_hero.books_eng_epub %}
+                                    <a href="{{ non_hero.books_eng_epub.url }}"><img
+                                            src="{% static "images/icons8-epub-50.png" %}" alt=""></a>
+                                {% endif %}
+                                {% if non_hero.books_eng_pdf %}
+                                    <a href="{{ non_hero.books_eng_pdf.url }}"><img
+                                            src="{% static "images/icons8-pdf-50.png" %}" alt=""></a>
+                                {% endif %}
+                                {% if non_hero.books_eng_djvu %}
+                                    <a href="{{ non_hero.books_eng_djvu.url }}"><img
+                                            src="{% static "images/icons8-djvu-50.png" %}" alt=""></a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if non_hero.books_fr_epub or non_hero.books_fr_pdf %}
+                            <p class="font-weight-bold">Скачать книгу на французском языке в формате</p>
+                            <div class="row ml-1 mb-4">
+                                {% if non_hero.books_fr_epub %}
+                                    <a href="{{ non_hero.books_fr_epub.url }}"><img
+                                            src="{% static "images/icons8-epub-50.png" %}" alt=""></a>
+                                {% endif %}
+                                {% if non_hero.books_fr_pdf %}
+                                    <a href="{{ non_hero.books_fr_pdf.url }}"><img
+                                            src="{% static "images/icons8-pdf-50.png" %}" alt=""></a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if non_hero.books_it_pdf %}
+                            <p class="font-weight-bold">Скачать книгу на итальянском языке в формате</p>
+                            <div class="row ml-1 mb-4">
+                                <a href="{{ non_hero.books_it_pdf.url }}"><img
+                                        src="{% static "images/icons8-pdf-50.png" %}" alt=""></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-12 mb-4">
+                    {% if non_hero.audiobooks.all %}
+                        <p class="font-weight-bold">Аудиокниги на русском</p>
+                        {% for audiobook in non_hero.audiobooks.all %}
+                            <a href="{{ audiobook.links }}" target="_blank">
+                                <button type="button"
+                                        class="btn btn-secondary btn-sm btn-block mt-2 text-truncate infinite">
+                                    <span class="text-to-left">Название: {{ audiobook.title }} <span
+                                            class="display-none">|</span> </span>
+                                    <span class="text-to-left">Исполнитель: {{ audiobook.author }} <span
+                                            class="display-none">|</span></span>
+                                    <span class="text-to-left">Длительность: {{ audiobook.running_time }}ч. <span
+                                            class="display-none">|</span></span>
+                                    {% if audiobook.release_date %}
+                                        <span class="text-to-left">Год: {{ audiobook.release_date }} <span
+                                                class="display-none">|</span></span>
+                                    {% endif %}
+                                    <span class="text-to-left">Битрейт: {{ audiobook.bitrate }}</span>
+                                    <span class="text-to-right">Скачать с Яндекс.Диск</span>
+                                </button>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                    {% if non_hero.get_films.all %}
+                        <p class="font-weight-bold">Фильмы по сюжету романа</p>
+                        {% for film in non_hero.get_films.all %}
+                            <a href="{{ film.links }}" target="_blank">
+                                <button type="button" class="btn btn-secondary btn-sm btn-block mt-2 infinite">
+                                        <span class="text-to-left ">Название: {{ film.title_rus }} <span
+                                                class="display-none">|</span></span>
+                                    <span class="text-to-left">Режиссер: {{ film.director }} <span
+                                            class="display-none">|</span></span>
+                                    <span class="text-to-left">Страна: {{ film.country }}
+                                        <span class="display-none">|</span></span>
+                                    <span class="text-to-left">Год: {{ film.release_date }}
+                                        <span class="display-none">|</span> </span>
+                                    <span class="text-to-left"> Длительность: {{ film.running_time }}м.</span>
+                                    <span class="text-to-right">Смотреть</span>
+                                </button>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="container">
+                    <div class="text-center">
+                        <a href="/novels/{{ non_hero.slug }}" type="button" class="btn btn-outline-info btn-lg"
+                           target="_blank">Читать онлайн</a>
+                        <img src="{{ non_hero.covers.url }}"/>
+                    </div>
+                </div>
+                <div class="container mt-4">
+                    <h2 class="h3 text-center pt-3 border-top">Обложки книг</h2>
+                    <div class="row" id="{{ non_hero.serial_number }}">
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}
+

@@ -1,0 +1,84 @@
+{% extends 'novels/base.html' %}
+{% block title %}Аудиокниги | Джеймс Хедли Чейз{% endblock %}
+{% block extra_head_tags %}
+    <meta name="description" content="Скачать аудиокниги по романам Джеймса Хедли Чейза"/>
+{% endblock %}
+{% block content %}
+
+    <ul class="nav nav-tabs bg-white justify-content-center">
+        <li class="nav-item dropdown">
+
+            <a class="nav-link dropdown-toggle text-info" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="true" aria-expanded="false">Романы</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/">По порядку</a>
+                <a class="dropdown-item" href="{% url 'hero_novels' %}">По сериям</a>
+                <a class="dropdown-item" href="{% url 'genre_novels' %}">По жанру</a>
+            </div>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-info" href="{% url 'stories' %}">Рассказы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'films' %}">Фильмы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'biography' %}">Биография</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info active" href="{% url 'audiobooks' %}">Аудиокниги</a>
+        </li>
+    </ul>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+
+<h1 class="display-4 text-center">Аудиокниги</h1>
+
+    <div class="jumbotron" >
+        <div class="container">
+    <form method="get">
+        <div class="row">
+            <div class="col-sm-5 col-12">
+              {{ filter.form.title }}
+            </div>
+            <div class="col-sm-5 col-12 mt-2 mt-sm-0">
+              {{ filter.form.author }}
+            </div>
+              <div class="col-sm-2 col-12 mt-2 mt-sm-0">
+              <input type="submit" value="Показать" class="btn btn-outline-info btn-block"/>
+            </div>
+        </div>
+        </div>
+    </form>
+
+    </div>
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Название аудиокниги</th>
+      <th scope="col">Исполнитель</th>
+      <th scope="col">Время звучания</th>
+        <th scope="col">Качество</th>
+        <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for obj in filter.qs %}
+    <tr>
+      <th scope="row"> {{ forloop.counter }}</th>
+      <td>{{ obj.title }}</td>
+      <td>{{ obj.author }}</td>
+        <td>{{ obj.running_time }}</td>
+      <td>{{ obj.bitrate }}</td>
+    <td><a href="{{ obj.links }}" target="_blank" class="text-info">Скачать</a></td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

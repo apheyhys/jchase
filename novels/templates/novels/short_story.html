@@ -1,0 +1,63 @@
+{% extends 'novels/base.html' %}
+{% load static %}
+{% block title %} Рассказ - {{ name_stories }}| Джеймс Хедли Чейз{% endblock %}
+{% block extra_head_tags %}
+    <meta name="description" content="{{ stories|truncatewords:10 }}"/>
+{% endblock %}
+{% block content %}
+
+      <ul class="nav nav-tabs bg-white justify-content-center">
+    <li class="nav-item dropdown">
+
+    <a class="nav-link dropdown-toggle text-info" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Романы</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/">По порядку</a>
+      <a class="dropdown-item" href="{% url 'hero_novels' %}">По сериям</a>
+      <a class="dropdown-item" href="{% url 'genre_novels' %}">По жанру</a>
+    </div>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link text-info active" href="{% url 'stories' %}">Рассказы</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-info" href="{% url 'films' %}">Фильмы</a>
+    </li>
+    <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'biography' %}">Биография</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-info" href="{% url 'audiobooks' %}">Аудиокниги</a>
+    </li>
+  </ul>
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+
+
+
+
+</div>
+
+    <div class="container">
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb bg-light">
+    <li class="breadcrumb-item text-info"><a href="{% url 'stories' %}" class="text-info">Рассказы</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ name_stories }}</li>
+  </ol>
+</nav>
+
+    <h1 class="display-5 text-center">{{ name_stories }}</h1>
+
+
+
+   <p>{{ stories|linebreaksbr }}<br></p>
+
+
+
+
+<div>
+
+
+
+{% endblock %}

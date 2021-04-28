@@ -1,0 +1,114 @@
+{% extends 'novels/base.html' %}
+{% load static %}
+{% block title %}Фильмы | Джеймс Хедли Чейз{% endblock %}
+{% block extra_head_tags %}
+    <meta name="description" content="Фильмы, снятые по романам Джеймса Хедли Чейза"/>
+{% endblock %}
+{% block content %}
+
+      <ul class="nav nav-tabs bg-white justify-content-center">
+    <li class="nav-item dropdown">
+
+    <a class="nav-link dropdown-toggle text-info" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Романы</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/">По порядку</a>
+      <a class="dropdown-item" href="{% url 'hero_novels' %}">По сериям</a>
+      <a class="dropdown-item" href="{% url 'genre_novels' %}">По жанру</a>
+    </div>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link text-info" href="{% url 'stories' %}">Рассказы</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-info active" href="{% url 'films' %}">Фильмы</a>
+    </li>
+    <li class="nav-item">
+            <a class="nav-link text-info" href="{% url 'biography' %}">Биография</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-info" href="{% url 'audiobooks' %}">Аудиокниги</a>
+    </li>
+  </ul>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Фильмы</h1>
+</div>
+<div class="container">
+    <div class="well well-sm">
+        <div class="btn-group">
+            <a href="#" id="list" class="btn btn-secondary btn-sm">
+                <span class="fas fa-list-ul"></span>Список</a>
+            <a href="#" id="grid" class="btn btn-secondary btn-sm">
+                <span class="fas fa-th"></span>Сетка</a>
+        </div>
+    </div>
+
+
+    <div class="row" id="main">
+        {% for film in films %}
+
+            <div class="col-xl-4 col-lg-6 col-12">
+
+        <div class="card mr-1 mt-1 test">
+            <div><img class="card-img-top p-2 fleximg" src="{{ film.film_cover.url }}" alt="{% if film.title_rus %}
+              {{ film.title_eng }}{% endif %}"></div>
+            <div class="card-body">
+                <h5 class="card-title">{{ film.title_rus }}</h5>
+            {% if film.title_eng %}
+                <p class="card-text text-muted">{{ film.title_eng }}</p>
+                {% else %}
+            <div class="empty-place"></div>
+            {% endif %}
+                <p class="card-text">Жанр: {{ film.genre }}</p>
+                <p class="card-text">Страна: {{ film.country }}</p>
+                <p class="card-text">Режжисер: {{ film.director }}</p>
+                <p class="card-text">По роману: <a href="{% url 'novels_list' %}#un-collapse-{{ film.according_to_the_novel.serial_number }}" class="text-info">
+                      {{ film.according_to_the_novel.title_rus }}</a></p>
+                <p class="card-text">Год: {{ film.release_date }}</p>
+                <p class="card-text">Время: {{ film.running_time }} мин</p>
+                {% if film.links %}
+                <a href="{{ film.links }}" target="_blank" class="btn btn-info btn-block">Смотреть</a>
+                {% else %}
+                <p><mark>Фильм не выходил на экраны в России</mark></p>
+                {% endif %}
+            </div>
+        </div>
+
+</div>
+
+        {% endfor %}
+
+
+
+    </div>
+
+
+
+
+
+    <div id="secondary">
+        <div class="film-list">
+            <table class="table mt-2">
+                <tbody>
+                    {% for film in films %}
+                    <tr>
+                        <th class="col-md-2" scope="row"><img class="w-100" src="{{ film.film_cover.url }}" alt="{{ film.title_eng }}"></th>
+                        <td class="col-md-3"><b>{{ film.title_rus }}</b><br> <span class="text-muted">{{ film.title_eng }}</span><br>Жанр:
+                            {{ film.genre }}<br>Страна:
+                            {{ film.country }}<br>Режжисер: {{ film.director }}</td>
+                        <td class="col-md-2">По роману: <br><a href="{% url 'novels_list' %}#un-collapse-{{ film.according_to_the_novel.serial_number }}" class="text-info">
+                      {{ film.according_to_the_novel.title_rus }}</a><br>Год: {{ film.release_date }} <br>Время: {{ film.running_time }} мин</td>
+                        <td class="col-md-12 d-none d-sm-block">{{ film.description }}</td>
+                        <td class="col-md-1">
+                            {% if film.links %}
+                            <a href="{{ film.links }}" target="_blank" class="btn btn-outline-info btn-block">Смотреть</a>
+                            {% else %}
+                            <p><mark>Фильм не выходил на экраны в России</mark></p>
+                            {% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+{% endblock %}

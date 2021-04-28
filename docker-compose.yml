@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:12.5-alpine
+    volumes:
+       - pg_data:/var/lib/postgresql/data/
+    env_file:
+      - ./db-env/.env.db
+  django:
+    build: .
+    command: sh -c "
+      python manage.py migrate &&
+      python manage.py initadmin &&
+      python manage.py runsslserver 0.0.0.0:8000"
+    volumes:
+      - media_volume:/usr/src/app/media
+    ports:
+      - 8000:8000
+    environment:
+      - DEBUG=1
+    depends_on:
+      - db
+
+volumes:
+  pg_data:
+  media_volume:
