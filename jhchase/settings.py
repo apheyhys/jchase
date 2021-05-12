@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.sitemaps',
+    'analytical',
     'sslserver',
     'environ',
     'captcha',
@@ -134,6 +135,10 @@ USE_L10N = True
 USE_TZ = True
 
 SITE_ID = 1
+
+GOOGLE_ANALYTICS_PROPERTY_ID = env('GOOGLE_ANALYTICS_PROPERTY_ID')
+
+YANDEX_METRICA_COUNTER_ID = env('YANDEX_METRICA_COUNTER_ID')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

@@ -1,23 +1,11 @@
 {% load static %}
-
+{% load analytical %}
 
 <!doctype html>
 <html lang="ru">
 
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    {#    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129878859-1"></script>#}
-    {#    <script>#}
-    {#        window.dataLayer = window.dataLayer || [];#}
-    {##}
-    {#        function gtag() {#}
-    {#            dataLayer.push(arguments);#}
-    {#        }#}
-    {##}
-    {#        gtag('js', new Date());#}
-    {##}
-    {#        gtag('config', 'UA-129878859-1');#}
-    {#    </script>#}
+    {% analytical_head_top %}
     <title>{% block title %}{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,29 +20,23 @@
     <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="stylesheet" href="{% static "css/main.css" %}">
     <link rel="stylesheet" href="{% static "css/css/bootstrap.min.css" %}">
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
     <link rel="stylesheet" href="{% static "css/fontawesome-free-5.4.1-web/css/all.css" %}">
     <link href="{% static "css/fontawesome-free-5.4.1-web/css/fontawesome.css" %}" rel="stylesheet">
     <link href="{% static "css/fontawesome-free-5.4.1-web/css/brands.css" %}" rel="stylesheet">
     <link href="{% static "css/fontawesome-free-5.4.1-web/css/solid.css" %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Diplomata+SC|Fredericka+the+Great" rel="stylesheet">
+    {% analytical_head_bottom %}
 </head>
 
 <body>
-
+{% analytical_body_top %}
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 box-shadow bg-white">
     <a href="/"><h1 class="my-0 mr-md-auto mb-4 different-font">James Hadley Chase</h1></a>
 </div>
-
-
-
 {% block content %}
 {% endblock %}
-
-
 <div id="updown"></div>
-
-
 <!-- Footer -->
 <footer class="pt-4 my-md-5 pt-md-5 border-top container">
     <div class="row">
@@ -68,8 +50,6 @@
 
     </div>
 </footer>
-
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script
@@ -116,6 +96,7 @@
         })
     })
 </script>
+{% analytical_body_bottom %}
 </body>
 
 </html>
